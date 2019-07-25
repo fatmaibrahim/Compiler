@@ -1,0 +1,36 @@
+empty cell		'id'				';'				'int'				'float'				'if'				'('				')'				'{'				'}'				'else'				'while'				'='				'relop'				'addop'				'mulop'				'num'				'+'				'-'				$				
+
+METHOD_BODY		STATEMENT_LIST		empty cell		STATEMENT_LIST		STATEMENT_LIST		STATEMENT_LIST		empty cell		empty cell		empty cell		empty cell		empty cell		STATEMENT_LIST		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		sync		
+
+STATEMENT_LIST		STATEMENT STATEMENT_LIST`		empty cell		STATEMENT STATEMENT_LIST`		STATEMENT STATEMENT_LIST`		STATEMENT STATEMENT_LIST`		empty cell		empty cell		empty cell		empty cell		empty cell		STATEMENT STATEMENT_LIST`		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		sync		
+
+STATEMENT_LIST`		STATEMENT STATEMENT_LIST`		empty cell		STATEMENT STATEMENT_LIST`		STATEMENT STATEMENT_LIST`		STATEMENT STATEMENT_LIST`		empty cell		empty cell		empty cell		empty cell		empty cell		STATEMENT STATEMENT_LIST`		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		\L		
+
+STATEMENT		ASSIGNMENT		empty cell		DECLERATION		DECLERATION		IF		empty cell		empty cell		empty cell		sync		empty cell		WHILE		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		sync		
+
+DECLERATION		sync		empty cell		PRIMITIVE_TYPE 'id' ';'		PRIMITIVE_TYPE 'id' ';'		sync		empty cell		empty cell		empty cell		sync		empty cell		sync		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		sync		
+
+PRIMITIVE_TYPE		sync		empty cell		'int'		'float'		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		
+
+IF		sync		empty cell		sync		sync		'if' '(' EXPRESSION ')' '{' STATEMENT '}' 'else' '{' STATEMENT '}'		empty cell		empty cell		empty cell		sync		empty cell		sync		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		sync		
+
+WHILE		sync		empty cell		sync		sync		sync		empty cell		empty cell		empty cell		sync		empty cell		'while' '(' EXPRESSION ')' '{' STATEMENT '}'		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		sync		
+
+ASSIGNMENT		'id' '=' EXPRESSION ';'		empty cell		sync		sync		sync		empty cell		empty cell		empty cell		sync		empty cell		sync		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		sync		
+
+EXPRESSION		SIMPLE_EXPRESSION EXPRESSION`		sync		empty cell		empty cell		empty cell		SIMPLE_EXPRESSION EXPRESSION`		sync		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		SIMPLE_EXPRESSION EXPRESSION`		SIMPLE_EXPRESSION EXPRESSION`		SIMPLE_EXPRESSION EXPRESSION`		empty cell		
+
+EXPRESSION`		empty cell		\L		empty cell		empty cell		empty cell		empty cell		\L		empty cell		empty cell		empty cell		empty cell		empty cell		'relop' SIMPLE_EXPRESSION		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		
+
+SIMPLE_EXPRESSION		TERM SIMPLE_EXPRESSION`		sync		empty cell		empty cell		empty cell		TERM SIMPLE_EXPRESSION`		sync		empty cell		empty cell		empty cell		empty cell		empty cell		sync		empty cell		empty cell		TERM SIMPLE_EXPRESSION`		SIGN TERM SIMPLE_EXPRESSION`		SIGN TERM SIMPLE_EXPRESSION`		empty cell		
+
+SIMPLE_EXPRESSION`		empty cell		\L		empty cell		empty cell		empty cell		empty cell		\L		empty cell		empty cell		empty cell		empty cell		empty cell		\L		'addop' TERM SIMPLE_EXPRESSION`		empty cell		empty cell		empty cell		empty cell		empty cell		
+
+TERM		FACTOR TERM`		sync		empty cell		empty cell		empty cell		FACTOR TERM`		sync		empty cell		empty cell		empty cell		empty cell		empty cell		sync		sync		empty cell		FACTOR TERM`		empty cell		empty cell		empty cell		
+
+TERM`		empty cell		\L		empty cell		empty cell		empty cell		empty cell		\L		empty cell		empty cell		empty cell		empty cell		empty cell		\L		\L		'mulop' FACTOR TERM`		empty cell		empty cell		empty cell		empty cell		
+
+FACTOR		'id'		sync		empty cell		empty cell		empty cell		'(' EXPRESSION ')'		sync		empty cell		empty cell		empty cell		empty cell		empty cell		sync		sync		sync		'num'		empty cell		empty cell		empty cell		
+
+SIGN		sync		empty cell		empty cell		empty cell		empty cell		sync		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		empty cell		sync		'+'		'-'		empty cell		
+

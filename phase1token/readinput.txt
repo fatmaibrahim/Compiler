@@ -1,0 +1,118 @@
+
+void readcode()
+{
+    string line = "";
+    ifstream infile("test_2.txt");
+
+    while (getline(infile, line))  //read line by line
+    {
+        string token="";
+        line.append(" ");
+        for(int j=0; j<line.size(); j++)
+        {
+            if(line[j]!='\t'&&line[j]!=' '&&line[j]!='\n'&&line[j]!='\r')
+            {
+                token+=line[j];
+            }
+            else
+            {
+                if(token.size()!=0)
+                {
+                    int statenum=0;
+                    stack<Statepos> stack1;
+                    for(int i=0; i<token.size(); i++)
+                    {
+                        int index=get_index_input(token.substr(i,1));
+                        if(index==1000)
+                        {
+                            index=getrange(token[i]);
+                            if(index==-1)
+                            {
+                            if(!stack1.empty())
+                            {
+                                struct Statepos st=stack1.top();
+                                stack1.pop();
+                                cout<<st.output;
+                                cout<<"\n";
+                                while(!stack1.empty()){
+                                    stack1.pop();
+                                }
+                            }
+                                cout<<"error this character not defined in language";
+                                cout<<"\n";
+                                break;
+                            }
+                        }
+                        ///////to final
+
+                        if(table[statenum][index]==-1)
+                        {
+                            if(stack1.empty())
+                            {
+                                cout<<"error in lexical";
+                                cout<<"\n";
+                                break;
+                            }
+                            else
+                            {
+                                struct Statepos st=stack1.top();
+                                stack1.pop();
+                                cout<<st.output;
+                                cout<<"\n";
+                                i=st.pos;//////////////
+                                statenum=0;
+                                while(!stack1.empty()){
+                                    stack1.pop();
+                                }
+                                continue;
+                            }
+                        }
+
+
+                        statenum=table[statenum][index];
+                        if(state.count(statenum)!=0)
+                        {
+                            struct Statepos st1=Statepos(state.at(statenum),i);
+                            stack1.push(st1);
+                        }
+
+                        if(i==token.size()-1)
+                        {
+                            if(state.count(statenum)!=0)
+                            {
+                                cout<<state.at(statenum);
+                                cout<<"\n";
+                                break;
+                            }
+                            else
+                            {
+                                if(stack1.empty())
+                                {
+                                    cout<<"error in lexical";
+                                    cout<<"\n";
+                                    break;
+                                }
+                                else
+                                {
+                                    struct Statepos st=stack1.top();
+                                    stack1.pop();
+                                    cout<<st.output;
+                                    cout<<"\n";
+                                     statenum=0;
+                                     while(!stack1.empty()){
+                                    stack1.pop();
+                                }
+                                    i=st.pos;//////////////
+                                }
+
+                            }
+                        }
+                    }
+                    token="";
+                }
+            }
+        }
+
+    }
+
+}

@@ -1,0 +1,11 @@
+Stack 				 input 						 output 
+S $ 	c e a d b $ 	S=>A 'b' S
+A 'b' S $ 	c e a d b $ 	A=>'c' A 'd'
+'c' A 'd' 'b' S $ 	c e a d b $ 	match 'c'
+A 'd' 'b' S $ 	e a d b $ 	Error:(illegal A) – discard e
+A 'd' 'b' S $ 	a d b $ 	A=>'a'
+'a' 'd' 'b' S $ 	a d b $ 	match 'a'
+'d' 'b' S $ 	d b $ 	match 'd'
+'b' S $ 	b $ 	match 'b'
+S $ 	$ 	S=>\L
+$ 	$ 	accept

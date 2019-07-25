@@ -1,0 +1,17 @@
+METHOD_BODY	'int'	'float'	'if'	'while'	'id'	
+STATEMENT_LIST	'int'	'float'	'if'	'while'	'id'	
+STATEMENT_LIST`	'int'	'float'	'if'	'while'	'id'	\L	
+STATEMENT	'int'	'float'	'if'	'while'	'id'	
+DECLERATION	'int'	'float'	
+PRIMITIVE_TYPE	'int'	'float'	
+IF	'if'	
+WHILE	'while'	
+ASSIGNMENT	'id'	
+EXPRESSION	'id'	'num'	'('	'+'	'-'	
+EXPRESSION`	\L	'relop'	
+SIMPLE_EXPRESSION	'id'	'num'	'('	'+'	'-'	
+SIMPLE_EXPRESSION`	'addop'	\L	
+TERM	'id'	'num'	'('	
+TERM`	'mulop'	\L	
+FACTOR	'id'	'num'	'('	
+SIGN	'+'	'-'	

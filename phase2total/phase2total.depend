@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1556087630 source:c:\users\pcc\desktop\phase2total\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<vector>
+	<algorithm>
+	<conio.h>
+	<string.h>
+	<stdio.h>
+	<map>
+	<sstream>
+	<bits/stdc++.h>
+	<stack>
+

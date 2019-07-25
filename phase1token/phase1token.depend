@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1556035291 source:c:\users\pcc\desktop\phase1token\main.cpp
+	<iostream>
+	<fstream>
+	<sstream>
+	<string>
+	<map>
+	<vector>
+	<bits/stdc++.h>
+	<stack>
+

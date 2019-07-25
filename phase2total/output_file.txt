@@ -1,0 +1,110 @@
+Stack 				 input 						 output 
+METHOD_BODY $ 	int id ; while ( id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	METHOD_BODY=>STATEMENT_LIST
+STATEMENT_LIST $ 	int id ; while ( id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	STATEMENT_LIST=>STATEMENT STATEMENT_LIST`
+STATEMENT STATEMENT_LIST` $ 	int id ; while ( id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	STATEMENT=>DECLERATION
+DECLERATION STATEMENT_LIST` $ 	int id ; while ( id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	DECLERATION=>PRIMITIVE_TYPE 'id' ';'
+PRIMITIVE_TYPE 'id' ';' STATEMENT_LIST` $ 	int id ; while ( id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	PRIMITIVE_TYPE=>'int'
+'int' 'id' ';' STATEMENT_LIST` $ 	int id ; while ( id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match 'int'
+'id' ';' STATEMENT_LIST` $ 	id ; while ( id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match 'id'
+';' STATEMENT_LIST` $ 	; while ( id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match ';'
+STATEMENT_LIST` $ 	while ( id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	STATEMENT_LIST`=>STATEMENT STATEMENT_LIST`
+STATEMENT STATEMENT_LIST` $ 	while ( id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	STATEMENT=>WHILE
+WHILE STATEMENT_LIST` $ 	while ( id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	WHILE=>'while' '(' EXPRESSION ')' '{' STATEMENT '}'
+'while' '(' EXPRESSION ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	while ( id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match 'while'
+'(' EXPRESSION ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	( id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match '('
+EXPRESSION ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	EXPRESSION=>SIMPLE_EXPRESSION EXPRESSION`
+SIMPLE_EXPRESSION EXPRESSION` ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	SIMPLE_EXPRESSION=>TERM SIMPLE_EXPRESSION`
+TERM SIMPLE_EXPRESSION` EXPRESSION` ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	TERM=>FACTOR TERM`
+FACTOR TERM` SIMPLE_EXPRESSION` EXPRESSION` ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	FACTOR=>'id'
+'id' TERM` SIMPLE_EXPRESSION` EXPRESSION` ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	id relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match 'id'
+TERM` SIMPLE_EXPRESSION` EXPRESSION` ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	TERM`=>\L
+SIMPLE_EXPRESSION` EXPRESSION` ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	SIMPLE_EXPRESSION`=>\L
+EXPRESSION` ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	EXPRESSION`=>'relop' SIMPLE_EXPRESSION
+'relop' SIMPLE_EXPRESSION ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	relop num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match 'relop'
+SIMPLE_EXPRESSION ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	SIMPLE_EXPRESSION=>TERM SIMPLE_EXPRESSION`
+TERM SIMPLE_EXPRESSION` ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	TERM=>FACTOR TERM`
+FACTOR TERM` SIMPLE_EXPRESSION` ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	FACTOR=>'num'
+'num' TERM` SIMPLE_EXPRESSION` ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	num ) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match 'num'
+TERM` SIMPLE_EXPRESSION` ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	TERM`=>\L
+SIMPLE_EXPRESSION` ')' '{' STATEMENT '}' STATEMENT_LIST` $ 	) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	SIMPLE_EXPRESSION`=>\L
+')' '{' STATEMENT '}' STATEMENT_LIST` $ 	) { id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match ')'
+'{' STATEMENT '}' STATEMENT_LIST` $ 	{ id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match '{'
+STATEMENT '}' STATEMENT_LIST` $ 	id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	STATEMENT=>ASSIGNMENT
+ASSIGNMENT '}' STATEMENT_LIST` $ 	id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	ASSIGNMENT=>'id' '=' EXPRESSION ';'
+'id' '=' EXPRESSION ';' '}' STATEMENT_LIST` $ 	id = id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match 'id'
+'=' EXPRESSION ';' '}' STATEMENT_LIST` $ 	= id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match '='
+EXPRESSION ';' '}' STATEMENT_LIST` $ 	id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	EXPRESSION=>SIMPLE_EXPRESSION EXPRESSION`
+SIMPLE_EXPRESSION EXPRESSION` ';' '}' STATEMENT_LIST` $ 	id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	SIMPLE_EXPRESSION=>TERM SIMPLE_EXPRESSION`
+TERM SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	TERM=>FACTOR TERM`
+FACTOR TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	FACTOR=>'id'
+'id' TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	id addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match 'id'
+TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	TERM`=>\L
+SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	SIMPLE_EXPRESSION`=>'addop' TERM SIMPLE_EXPRESSION`
+'addop' TERM SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	addop num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match 'addop'
+TERM SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	TERM=>FACTOR TERM`
+FACTOR TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	FACTOR=>'num'
+'num' TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	num } if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match 'num'
+TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	} if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	Error:(illegal TERM`) – discard }
+TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	if ( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	Error:(illegal TERM`) – discard if
+TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	( id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	Error:(illegal TERM`) – discard (
+TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	id relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	Error:(illegal TERM`) – discard id
+TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	TERM`=>\L
+SIMPLE_EXPRESSION` EXPRESSION` ';' '}' STATEMENT_LIST` $ 	relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	SIMPLE_EXPRESSION`=>\L
+EXPRESSION` ';' '}' STATEMENT_LIST` $ 	relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	EXPRESSION`=>'relop' SIMPLE_EXPRESSION
+'relop' SIMPLE_EXPRESSION ';' '}' STATEMENT_LIST` $ 	relop num ) { id = id addop num ; } else { id = id addop id ; } $ 	match 'relop'
+SIMPLE_EXPRESSION ';' '}' STATEMENT_LIST` $ 	num ) { id = id addop num ; } else { id = id addop id ; } $ 	SIMPLE_EXPRESSION=>TERM SIMPLE_EXPRESSION`
+TERM SIMPLE_EXPRESSION` ';' '}' STATEMENT_LIST` $ 	num ) { id = id addop num ; } else { id = id addop id ; } $ 	TERM=>FACTOR TERM`
+FACTOR TERM` SIMPLE_EXPRESSION` ';' '}' STATEMENT_LIST` $ 	num ) { id = id addop num ; } else { id = id addop id ; } $ 	FACTOR=>'num'
+'num' TERM` SIMPLE_EXPRESSION` ';' '}' STATEMENT_LIST` $ 	num ) { id = id addop num ; } else { id = id addop id ; } $ 	match 'num'
+TERM` SIMPLE_EXPRESSION` ';' '}' STATEMENT_LIST` $ 	) { id = id addop num ; } else { id = id addop id ; } $ 	TERM`=>\L
+SIMPLE_EXPRESSION` ';' '}' STATEMENT_LIST` $ 	) { id = id addop num ; } else { id = id addop id ; } $ 	SIMPLE_EXPRESSION`=>\L
+';' '}' STATEMENT_LIST` $ 	) { id = id addop num ; } else { id = id addop id ; } $ 	Error: missing ;, inserted
+'}' STATEMENT_LIST` $ 	) { id = id addop num ; } else { id = id addop id ; } $ 	Error: missing }, inserted
+STATEMENT_LIST` $ 	) { id = id addop num ; } else { id = id addop id ; } $ 	Error:(illegal STATEMENT_LIST`) – discard )
+STATEMENT_LIST` $ 	{ id = id addop num ; } else { id = id addop id ; } $ 	Error:(illegal STATEMENT_LIST`) – discard {
+STATEMENT_LIST` $ 	id = id addop num ; } else { id = id addop id ; } $ 	STATEMENT_LIST`=>STATEMENT STATEMENT_LIST`
+STATEMENT STATEMENT_LIST` $ 	id = id addop num ; } else { id = id addop id ; } $ 	STATEMENT=>ASSIGNMENT
+ASSIGNMENT STATEMENT_LIST` $ 	id = id addop num ; } else { id = id addop id ; } $ 	ASSIGNMENT=>'id' '=' EXPRESSION ';'
+'id' '=' EXPRESSION ';' STATEMENT_LIST` $ 	id = id addop num ; } else { id = id addop id ; } $ 	match 'id'
+'=' EXPRESSION ';' STATEMENT_LIST` $ 	= id addop num ; } else { id = id addop id ; } $ 	match '='
+EXPRESSION ';' STATEMENT_LIST` $ 	id addop num ; } else { id = id addop id ; } $ 	EXPRESSION=>SIMPLE_EXPRESSION EXPRESSION`
+SIMPLE_EXPRESSION EXPRESSION` ';' STATEMENT_LIST` $ 	id addop num ; } else { id = id addop id ; } $ 	SIMPLE_EXPRESSION=>TERM SIMPLE_EXPRESSION`
+TERM SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	id addop num ; } else { id = id addop id ; } $ 	TERM=>FACTOR TERM`
+FACTOR TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	id addop num ; } else { id = id addop id ; } $ 	FACTOR=>'id'
+'id' TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	id addop num ; } else { id = id addop id ; } $ 	match 'id'
+TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	addop num ; } else { id = id addop id ; } $ 	TERM`=>\L
+SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	addop num ; } else { id = id addop id ; } $ 	SIMPLE_EXPRESSION`=>'addop' TERM SIMPLE_EXPRESSION`
+'addop' TERM SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	addop num ; } else { id = id addop id ; } $ 	match 'addop'
+TERM SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	num ; } else { id = id addop id ; } $ 	TERM=>FACTOR TERM`
+FACTOR TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	num ; } else { id = id addop id ; } $ 	FACTOR=>'num'
+'num' TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	num ; } else { id = id addop id ; } $ 	match 'num'
+TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	; } else { id = id addop id ; } $ 	TERM`=>\L
+SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	; } else { id = id addop id ; } $ 	SIMPLE_EXPRESSION`=>\L
+EXPRESSION` ';' STATEMENT_LIST` $ 	; } else { id = id addop id ; } $ 	EXPRESSION`=>\L
+';' STATEMENT_LIST` $ 	; } else { id = id addop id ; } $ 	match ';'
+STATEMENT_LIST` $ 	} else { id = id addop id ; } $ 	Error:(illegal STATEMENT_LIST`) – discard }
+STATEMENT_LIST` $ 	else { id = id addop id ; } $ 	Error:(illegal STATEMENT_LIST`) – discard else
+STATEMENT_LIST` $ 	{ id = id addop id ; } $ 	Error:(illegal STATEMENT_LIST`) – discard {
+STATEMENT_LIST` $ 	id = id addop id ; } $ 	STATEMENT_LIST`=>STATEMENT STATEMENT_LIST`
+STATEMENT STATEMENT_LIST` $ 	id = id addop id ; } $ 	STATEMENT=>ASSIGNMENT
+ASSIGNMENT STATEMENT_LIST` $ 	id = id addop id ; } $ 	ASSIGNMENT=>'id' '=' EXPRESSION ';'
+'id' '=' EXPRESSION ';' STATEMENT_LIST` $ 	id = id addop id ; } $ 	match 'id'
+'=' EXPRESSION ';' STATEMENT_LIST` $ 	= id addop id ; } $ 	match '='
+EXPRESSION ';' STATEMENT_LIST` $ 	id addop id ; } $ 	EXPRESSION=>SIMPLE_EXPRESSION EXPRESSION`
+SIMPLE_EXPRESSION EXPRESSION` ';' STATEMENT_LIST` $ 	id addop id ; } $ 	SIMPLE_EXPRESSION=>TERM SIMPLE_EXPRESSION`
+TERM SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	id addop id ; } $ 	TERM=>FACTOR TERM`
+FACTOR TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	id addop id ; } $ 	FACTOR=>'id'
+'id' TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	id addop id ; } $ 	match 'id'
+TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	addop id ; } $ 	TERM`=>\L
+SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	addop id ; } $ 	SIMPLE_EXPRESSION`=>'addop' TERM SIMPLE_EXPRESSION`
+'addop' TERM SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	addop id ; } $ 	match 'addop'
+TERM SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	id ; } $ 	TERM=>FACTOR TERM`
+FACTOR TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	id ; } $ 	FACTOR=>'id'
+'id' TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	id ; } $ 	match 'id'
+TERM` SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	; } $ 	TERM`=>\L
+SIMPLE_EXPRESSION` EXPRESSION` ';' STATEMENT_LIST` $ 	; } $ 	SIMPLE_EXPRESSION`=>\L
+EXPRESSION` ';' STATEMENT_LIST` $ 	; } $ 	EXPRESSION`=>\L
+';' STATEMENT_LIST` $ 	; } $ 	match ';'
+STATEMENT_LIST` $ 	} $ 	Error:(illegal STATEMENT_LIST`) – discard }
+STATEMENT_LIST` $ 	$ 	STATEMENT_LIST`=>\L
+$ 	$ 	accept

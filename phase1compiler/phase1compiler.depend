@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1554902611 source:c:\users\pcc\desktop\phase1compiler\main.cpp
+	<iostream>
+	<string>
+	<iterator>
+	<map>
+	<vector>
+	<fstream>
+	<sstream>
+	<stack>
+	<string.h>
+	<bits/stdc++.h>
+
